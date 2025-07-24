@@ -1,0 +1,32 @@
+openapi: "3.0.1"
+info:
+  title: Lovable-Deribit Integration API
+  version: "1.0.0"
+paths:
+  /orders:
+    post:
+      summary: "Enviar ordem para Deribit"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderRequest"
+      responses:
+        "200":
+          description: "Sucesso"
+components:
+  schemas:
+    OrderRequest:
+      type: object
+      required: [user_id, instrument, side, amount]
+      properties:
+        user_id:
+          type: string
+        instrument:
+          type: string
+        side:
+          type: string
+          enum: [buy, sell]
+        amount:
+          type: integer

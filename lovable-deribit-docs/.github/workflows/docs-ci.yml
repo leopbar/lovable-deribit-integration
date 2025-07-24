@@ -1,0 +1,16 @@
+name: Docs CI/CD
+on:
+  push:
+    paths:
+      - "docs/**"
+      - "website/**"
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm ci
+      - run: npm run build --prefix website
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_dir: website/build
